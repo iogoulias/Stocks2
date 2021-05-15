@@ -88,7 +88,7 @@ div,h1 {
 		}
 		for(var key in earnings) {
 			if(key.substring(0, 4) <= new Date().getFullYear) {
-				console.log(earnings[key]);
+				//console.log(earnings[key]);
 				PE[key] = yearlyobject[(key).substring(0, 4)] / earnings[key]["reportedEPS"]
 			}
 		}
@@ -179,7 +179,7 @@ div,h1 {
 
 	async function testCombineData(symbol1) {
 		//window.setTimeout(function(){
-		console.log("clicked");
+		//console.log("clicked");
 		document.getElementById("spin").style.opacity = 1;
 		document.getElementById("chart_div0").innerHTML = "";
 		document.getElementById("chart_div1").innerHTML = "";
@@ -194,9 +194,9 @@ div,h1 {
 			"TIME_SERIES_MONTHLY": 1
 		}
 		await fetch("https://www.alphavantage.co/query?function=EARNINGS&symbol=" + symbol + "&apikey=AL05ALNJ42XAZWTW").then(x => x.json()).then(function(y) {
-			console.log(y)
+			//console.log(y)
 			var parse_monthly_earnings = y;
-			console.log(parse_monthly_earnings)
+			//console.log(parse_monthly_earnings)
 			if(parse_monthly_earnings.hasOwnProperty("annualEarnings")) {
 				parse_monthly_earnings["annualEarnings"][0]["reportedEPS"] = getCurrentYearEarnings(parse_monthly_earnings)
 				datakind["EARNINGS"] = parse_monthly_earnings["annualEarnings"]
@@ -205,9 +205,9 @@ div,h1 {
 				throw "Unexpected Error! Alphavantage Earnings Call Failed"
 			}
 		}).then(xx => xx.json()).then(function(yy) {
-			console.log(yy)
+			//console.log(yy)
 			var parse_time_series = yy;
-			console.log(parse_time_series)
+			//console.log(parse_time_series)
 			if(parse_time_series.hasOwnProperty("Monthly Adjusted Time Series")) {
 				datakind["TIME_SERIES_MONTHLY"] = parse_time_series["Monthly Adjusted Time Series"];
 				datakind["EARNINGS"] = reformat(datakind["EARNINGS"], "fiscalDateEnding")
@@ -217,7 +217,7 @@ div,h1 {
 				throw "Unexpected Error! Alphavantage Time Series Failed"
 			}
 		}).then(xxx => xxx.json()).then(function(yyy) {
-			console.log(yyy)
+			//console.log(yyy)
 			var parseIncomeStatement=yyy;
 			if(parseIncomeStatement.hasOwnProperty("annualReports")) {
 			datakind["NET_INCOME_TTM"]=	getCurrentNetIncome(parseIncomeStatement);
@@ -227,7 +227,7 @@ div,h1 {
 				throw "Unexpected Error! Alphavantage Income Statement Failed"		
 			}
 		}).then(xxxx => xxxx.json()).then(function(yyyy) {
-			console.log(yyyy)
+			//console.log(yyyy)
 			var parseBalanceSheet=yyyy;
 			if(parseBalanceSheet.hasOwnProperty("annualReports")) {
 			datakind["BALANCE_SHEET"] = parseBalanceSheet["annualReports"];	
@@ -236,7 +236,7 @@ div,h1 {
 				throw "Unexpected Error! Alphavantage Balance Sheet Failed"		
 			}
 		}).then(xxxxx => xxxxx.json()).then(function(yyyyy) {
-			console.log(yyyyy)
+			//console.log(yyyyy)
 			var overView=yyyyy;
 			if(overView.hasOwnProperty("RevenuePerShareTTM")) {
 			datakind["RevenuePerShareTTM"] = overView["RevenuePerShareTTM"];
@@ -1143,11 +1143,11 @@ div,h1 {
 			alloptions = alloptions + " var options" + k + "=" + JSON.stringify(options[k]) + ";";
 			alldata = alldata + " var data" + k + " = 	google.visualization.arrayToDataTable(" + JSON.stringify(response) + ");"
 			allchartdiv = allchartdiv + " var chart_div" + k + " = document.getElementById('chart_div" + k + "');"
-			allfunctions = allfunctions + " google.visualization.events.addListener(chart" + k + ", 'ready', function () {  try { google.visualization.events.removeListener(chart"+k+");} catch(e2) {}; console.log('ready');var a = document.getElementById('a"+k+"');a.href = (chart" +k+").getImageURI();a.download = '"+symbol+""+k+".png'; a.click();var removeGridCharts={'0':1,'4':1,'5':1,'6':1};	if(removeGridCharts.hasOwnProperty('" + k + "')) {var gridlines = document.getElementById('chart_div"+k+"').getElementsByTagName('rect'); var tcolor='';var whiteindex=0;var lineIndex = 0;var lineCount = 0; 	Array.prototype.forEach.call(gridlines, function(line)  	{if ((line.getAttribute('height') === '1' && (line.getAttribute('fill')=='#cccccc' || line.getAttribute('fill')=='#ebebeb'))) {	if (tcolor=='#ebebeb' && line.getAttribute('fill')=='#cccccc' ) { whiteindex=lineCount;}	lineCount++; tcolor=line.getAttribute('fill')} }); lineCount = (whiteindex);  Array.prototype.forEach.call(gridlines, function(line) { if( line.getAttribute('height') === '1' && (line.getAttribute('fill')=='#cccccc' || line.getAttribute('fill')=='#ebebeb') && (lineIndex<=lineCount))  {if(lineIndex!=whiteindex+1 || lineIndex==whiteindex){line.setAttribute('fill', 'white');} lineIndex+=1;}}) }   allimages.push([" + k + ",chart" + k + ".getImageURI()]); if(allimages.length==" + (In.length - 1) + ") { document.getElementById(\"spin\").style.opacity = 0; }   });      chart" + k + ".draw(data" + k + ", options" + k + "); "
+			allfunctions = allfunctions + " google.visualization.events.addListener(chart" + k + ", 'ready', function () {  try { google.visualization.events.removeListener(chart"+k+");} catch(e2) {}; var a = document.getElementById('a"+k+"');a.href = (chart" +k+").getImageURI();a.download = '"+symbol+""+k+".png'; a.click();var removeGridCharts={'0':1,'4':1,'5':1,'6':1};	if(removeGridCharts.hasOwnProperty('" + k + "')) {var gridlines = document.getElementById('chart_div"+k+"').getElementsByTagName('rect'); var tcolor='';var whiteindex=0;var lineIndex = 0;var lineCount = 0; 	Array.prototype.forEach.call(gridlines, function(line)  	{if ((line.getAttribute('height') === '1' && (line.getAttribute('fill')=='#cccccc' || line.getAttribute('fill')=='#ebebeb'))) {	if (tcolor=='#ebebeb' && line.getAttribute('fill')=='#cccccc' ) { whiteindex=lineCount;}	lineCount++; tcolor=line.getAttribute('fill')} }); lineCount = (whiteindex);  Array.prototype.forEach.call(gridlines, function(line) { if( line.getAttribute('height') === '1' && (line.getAttribute('fill')=='#cccccc' || line.getAttribute('fill')=='#ebebeb') && (lineIndex<=lineCount))  {if(lineIndex!=whiteindex+1 || lineIndex==whiteindex){line.setAttribute('fill', 'white');} lineIndex+=1;}}) }   allimages.push([" + k + ",chart" + k + ".getImageURI()]); if(allimages.length==" + (In.length - 1) + ") { document.getElementById(\"spin\").style.opacity = 0; }   });      chart" + k + ".draw(data" + k + ", options" + k + "); "
 			allvisualizations = allvisualizations + " var chart" + k + " = new google.visualization.ComboChart(chart_div" + k + ");"
 		}
 		var html = "    google.charts.load(\"current\", {packages:[\"corechart\"]});    google.charts.setOnLoadCallback(drawChart);  var allimages=[];  function drawChart() {      " + alldata + "   " + alloptions + " " + allchartdiv + "  " + allvisualizations + " " + allfunctions + "  }" + alldivs;
-		console.log(html.replace(/\$\$\$\$\$/g, "script"))
+		//console.log(html.replace(/\$\$\$\$\$/g, "script"))
 		eval(html)
 	}
 	</script>
