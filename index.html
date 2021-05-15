@@ -183,7 +183,7 @@ div,h1 {
 			if(parse_monthly_earnings.hasOwnProperty("annualEarnings")) {
 				parse_monthly_earnings["annualEarnings"][0]["reportedEPS"] = getCurrentYearEarnings(parse_monthly_earnings)
 				datakind["EARNINGS"] = parse_monthly_earnings["annualEarnings"]
-				return fetch("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=" + symbol + "&apikey=AL05ALNJ42XAZWTW")
+				return fetch("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=" + symbol + "&apikey=1BVJMUHG5275J4CX")
 			} else {
 				throw "Unexpected Error! Alphavantage Earnings Call Failed"
 			}
@@ -194,7 +194,7 @@ div,h1 {
 			if(parse_time_series.hasOwnProperty("Monthly Adjusted Time Series")) {
 				datakind["TIME_SERIES_MONTHLY"] = parse_time_series["Monthly Adjusted Time Series"];
 				datakind["EARNINGS"] = reformat(datakind["EARNINGS"], "fiscalDateEnding")
-				return fetch("https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=" + symbol + "&apikey=AL05ALNJ42XAZWTW")
+				return fetch("https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=" + symbol + "&apikey=FEYKA34MIW8UUEHQ")
 
 			} else {
 				throw "Unexpected Error! Alphavantage Time Series Failed"
@@ -205,7 +205,7 @@ div,h1 {
 			if(parseIncomeStatement.hasOwnProperty("annualReports")) {
 			datakind["NET_INCOME_TTM"]=	getCurrentNetIncome(parseIncomeStatement);
 			datakind["INCOME_STATEMENT"] = parseIncomeStatement["annualReports"];
-				return fetch("https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=" + symbol + "&apikey=AL05ALNJ42XAZWTW")
+				return fetch("https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=" + symbol + "&apikey=1BVJMUHG5275J4CX")
 			} else {
 				throw "Unexpected Error! Alphavantage Income Statement Failed"		
 			}
