@@ -172,6 +172,7 @@ div,h1 {
 
 
 	async function testCombineData(symbol1) {
+		window.setTimeout(function(){
 		console.log("clicked");
 		document.getElementById("spin").style.opacity = 1;
 		document.getElementById("chart_div0").innerHTML = "";
@@ -253,6 +254,7 @@ div,h1 {
 				throw "Unexpected Error! Alphavantage Overview Failed"		
 			}
 		})
+			},60000)
 	}
 
 	function reformat(data, parentkey) {
