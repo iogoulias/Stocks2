@@ -168,7 +168,7 @@ div,h1 {
 	async function initRecursive(allticks,ind,len) {
 		await testCombineData(allticks[ind]).then(function(x){
 		if (ind+1<len) {
-		widow.setTimeout(1000,function(){
+		window.setTimeout(1000,function(){
 		await initRecursive(allticks,ind+1,len)
 		})
 		
