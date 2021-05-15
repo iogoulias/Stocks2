@@ -198,7 +198,9 @@ div,h1 {
 			var parse_monthly_earnings = y;
 			//console.log(parse_monthly_earnings)
 			if(parse_monthly_earnings.hasOwnProperty("annualEarnings")) {
+			    if((parse_monthly_earnings["annualEarnings"]).length>0) {
 				parse_monthly_earnings["annualEarnings"][0]["reportedEPS"] = getCurrentYearEarnings(parse_monthly_earnings)
+				}
 				datakind["EARNINGS"] = parse_monthly_earnings["annualEarnings"]
 				return fetch("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=" + symbol + "&apikey=1BVJMUHG5275J4CX")
 			} else {
@@ -271,7 +273,11 @@ div,h1 {
 		return outputdata
 	}
     function Operations(datakind,symbol) {
+	    if(Object.keys(datakind["EARNINGS"]).length>0) {
 		var mindate = Object.keys(datakind["EARNINGS"]).sort()[0];
+		} else {
+		var mindate='2010-01-01'
+		}
 				var decadeobj = createlast10years(mindate);
 				var decadeobjRPS={...decadeobj};
 				var decadeobjtotalRevenue={...decadeobj};
