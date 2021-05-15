@@ -205,7 +205,7 @@ div,h1 {
 			if(parseIncomeStatement.hasOwnProperty("annualReports")) {
 			datakind["NET_INCOME_TTM"]=	getCurrentNetIncome(parseIncomeStatement);
 			datakind["INCOME_STATEMENT"] = parseIncomeStatement["annualReports"];
-				return fetch("https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=" + symbol + "&apikey=1BVJMUHG5275J4CX")
+				return fetch("https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=" + symbol + "&apikey=0TDZZQHZZ5D7IB3I")
 			} else {
 				throw "Unexpected Error! Alphavantage Income Statement Failed"		
 			}
@@ -214,7 +214,7 @@ div,h1 {
 			var parseBalanceSheet=yyyy;
 			if(parseBalanceSheet.hasOwnProperty("annualReports")) {
 			datakind["BALANCE_SHEET"] = parseBalanceSheet["annualReports"];	
-			return fetch("https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + symbol + "&apikey=AL05ALNJ42XAZWTW")
+			return fetch("https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + symbol + "&apikey=VFSTWVPNNHSZIZ6B")
 			} else {
 				throw "Unexpected Error! Alphavantage Balance Sheet Failed"		
 			}
