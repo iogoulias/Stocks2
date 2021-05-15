@@ -166,16 +166,16 @@ div,h1 {
 	            return    await initRecursive(allticks,0,2)
 	}
 		
-	function sleep (fn, par,par1,par2) {
-           return new Promise((resolve) => {
-          // wait 1s before calling fn(par)
-         setTimeout(() => resolve(fn( par,par1,par2)), 1000)
-         })
-        }
+
 	async function initRecursive(allticks,ind,len) {
 		await testCombineData(allticks[ind]).then(function(x){
 		if (ind+1<len) {
-			await sleep(initRecursive,allticks,ind+1,len)
+			 await new Promise((resolve) => {
+                               setTimeout(() => {
+                              // Resolve the promise
+                             resolve(initRecursive(allticks,ind+1,len));
+                             }, 1000);
+                         });
 		} else {
 		return 1;
 		}
